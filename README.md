@@ -38,7 +38,7 @@ Whenever a chat message is received with a dish name (e.g., *"Make a chocolate c
 
 ## Technologies Used
 
-- [n8n](https://n8n.io) — Workflow automation platform  
+- [n8n](https://n8n.io) — Workflow automation platform
 - [Google Gemini](https://deepmind.google) — LLM used via Gemini 1.5 Flash  
 - [Airtable](https://airtable.com) — Recipe storage database
 
@@ -46,7 +46,11 @@ Whenever a chat message is received with a dish name (e.g., *"Make a chocolate c
 ## Workflow 
 
 ![workflow](https://github.com/user-attachments/assets/9c9f4899-b289-4a9a-bd2c-4b04c5fe8ea5)
+---
+## Airtable
+
 ![part1](https://github.com/user-attachments/assets/23751068-a6f8-4045-bc51-ba76fe10159c)
+
 ![recipe](https://github.com/user-attachments/assets/f293a483-d15f-4ae5-a5e8-5c1d7a5ad17f)
 
 ---
