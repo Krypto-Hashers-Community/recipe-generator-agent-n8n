@@ -1,0 +1,174 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -340,
+        -40
+      ],
+      "id": "5820aec0-29c9-4c58-95cb-1999b5b16c77",
+      "name": "When chat message received",
+      "webhookId": "1369d3a1-10f5-465e-8f5a-93a869327fa6"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<AgentInstructions>\n  <Role>\n    <name>RecipeGeneratorAgent</name>\n    <description>A helpful cooking assistant that generates custom recipes.</description>\n  </Role>\n  <Goal>\n    <Primary>Provide a complete recipe including ingredients and step-by-step instructions based on the user’s requested dish.</Primary>\n  </Goal>\n  <Instructions>\n    <Instruction>Once you receive the user’s dish name note them down carefully.</Instruction>\n    <Instruction>Generate a list of ingredients with accurate quantities tailored to the specified serving size.</Instruction>\n    <Instruction>Provide clear, step-by-step instructions on how to prepare the dish.</Instruction>\n    <Instruction>Where applicable, include cooking times, tips, or variations to enhance the recipe.</Instruction>\n  </Instructions>\n</AgentInstructions>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        -40
+      ],
+      "id": "8c7c6606-cd8c-4521-be81-09dee0b36d2a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        180
+      ],
+      "id": "9b32d084-2194-42e4-af90-375209048352",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xohqa4YiWCTIwY8k",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appn5wSedzeUH4SeL",
+          "mode": "list",
+          "cachedResultName": "test",
+          "cachedResultUrl": "https://airtable.com/appn5wSedzeUH4SeL"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblEd2Fn8OoqzICzj",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appn5wSedzeUH4SeL/tblEd2Fn8OoqzICzj"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "recipes": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "recipes"
+          ],
+          "schema": [
+            {
+              "id": "recipes",
+              "displayName": "recipes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        320,
+        -40
+      ],
+      "id": "8ada7388-8bf2-447e-ab3b-9b1ed45da746",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "oTEj8EyRSK5edlth",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        180
+      ],
+      "id": "23d994b7-c351-4884-9453-6f44268bfcff",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0b9ecf2b2f258ef20d00806d0b48ab421c087705a4ffe16a8e24d5b8e53c9792"
+  }
+}
