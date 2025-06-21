@@ -18,7 +18,7 @@
       "parameters": {
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "<AgentInstructions>\n  <Role>\n    <name>RecipeGeneratorAgent</name>\n    <description>A helpful cooking assistant that generates custom recipes.</description>\n  </Role>\n  <Goal>\n    <Primary>Provide a complete recipe including ingredients and step-by-step instructions based on the user’s requested dish.</Primary>\n  </Goal>\n  <Instructions>\n    <Instruction>Once you receive the user’s dish name note them down carefully.</Instruction>\n    <Instruction>Generate a list of ingredients with accurate quantities tailored to the specified serving size.</Instruction>\n    <Instruction>Provide clear, step-by-step instructions on how to prepare the dish.</Instruction>\n    <Instruction>Where applicable, include cooking times, tips, or variations to enhance the recipe.</Instruction>\n  </Instructions>\n</AgentInstructions>\n"
+          "systemMessage": "<AgentInstructions>\n  <Role>\n    <name>RecipeGeneratorAgent</name>\n    <description>A helpful cooking assistant that generates custom recipes.</description>\n  </Role>\n  <Goal>\n    <Primary>Provide a complete recipe including ingredients and step-by-step instructions based on the user's requested dish.</Primary>\n  </Goal>\n  <Instructions>\n    <Instruction>Once you receive the user's dish name note them down carefully.</Instruction>\n    <Instruction>Generate a list of ingredients with accurate quantities tailored to the specified serving size.</Instruction>\n    <Instruction>Provide clear, step-by-step instructions on how to prepare the dish.</Instruction>\n    <Instruction>Where applicable, include cooking times, tips, or variations to enhance the recipe.</Instruction>\n  </Instructions>\n</AgentInstructions>"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -99,7 +99,7 @@
         320,
         -40
       ],
-      "id": "8ada7388-8bf2-447e-ab3b-9b1ed45da746",
+      "id": "fffd0db2-2e0e-47a4-86bb-e6e42fcff256",
       "name": "Airtable",
       "credentials": {
         "airtableTokenApi": {
@@ -107,17 +107,6 @@
           "name": "Airtable Personal Access Token account"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
-      "position": [
-        180,
-        180
-      ],
-      "id": "23d994b7-c351-4884-9453-6f44268bfcff",
-      "name": "Structured Output Parser"
     }
   ],
   "connections": {
@@ -149,17 +138,6 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Structured Output Parser": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_outputParser",
             "index": 0
           }
         ]
